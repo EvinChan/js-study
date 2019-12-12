@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/**
+			 * 电子邮件：
+			 * 	hello@qq.com
+			 * 
+			 * -任意字母数字下划线 . ~*
+			 * 
+			 * -一般网上都会有现成的正则表达式
+			 */
+			var email = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+			var email1 = "935126728@qq.com";
+			console.log(email.test(email1));
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

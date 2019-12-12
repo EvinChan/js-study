@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/**
+			 * 创建一个正则表达式检查一个字符串是否含有aaa
+			 */
+			
+			/**
+			 * 量词
+			 * -通过量词可以设置一个内容出现次数
+			 * -量词只对它前边的一个内容起作用
+			 *-{n}正好出现n次
+			 * -{m,n}出现m到n次
+			 * -{n,}n次以上
+			 * - + 至少一个,相当于{1,}
+			 * - * 0个或多个，相当于{0}
+			 * - ? 0个或1个，相当于{0,1}
+			 */
+			var reg = /a{3}/;
+			//找ababa
+			reg = /ab{3}/;
+			reg = /(ab){3}/;
+			reg = /ab{1,3}c/;
+			reg = /ab+c/;
+			console.log(reg.test("aaaabc"));
+			console.log(reg.test("abababababababbbb"));
+			console.log(reg.test("abbbc"));
+			
+			/**
+			 * 检查一个字符串是否以a开头
+			 * -^ 表示开头 例：/^a/
+			 * -$ 表示结尾为 例：/a$/
+			 * - /^a$/ a即是开头又是结尾，简单说就是只能有一个a
+			 */
+			
+			reg = /^a/;
+			reg = /a$/;
+			console.log(reg.test("bcbca"));
+			console.log(reg.test("abcabc"));
+			
+			/**
+			 * 创建一个正则表达式是否为一个正确的手机号码
+			 * 
+			 * 手机号码规则：
+			 * 	-1、手机号码第一位为1
+			 * 	-2、第二位不能为3-9
+			 * 	-3、第三位以后任意数字，长度限制为9个
+			 */
+			var pNum = "15245678909";
+			var phone = /^1[3-9][0-9]{9}$/;
+			console.log(phone.test(pNum));
+			
+			/**
+			 * 检查字符串中是否含有.
+			 * -.表示任意字符
+			 * 在正则表达式中使用\作为转义字符\.
+			 */
+			var yuan = /\./;
+			console.log(yuan.test("ads..zz"));
+			
+			/**
+			 * \w 任意字母、数字、_ [A-z0-9]
+			 * \W 除了字母、数字、_[^A-z0-9]
+			 * \d 任意数字[0-9]
+			 * \D 除了数字[^0-9]
+			 * \s 空格
+			 * \S 除了空格
+			 * \b 单词边界
+			 * \B 除了单词边界
+			 */
+			
+			/**
+			 * 创建一个正则表达式检查一个字符串中是否含有单词child
+			 */
+			var child = /\bchild\b/;
+			console.log(child.test("child ren"));
+			
+			//接收一个用户的输入
+			var str = prompt("请输入你的用户名：");
+			//去除字符串中的空格
+			//去除空格就是使用""来代替空格
+			str = str.replace(/^\s*|\s*$/g,"");
+			console.log(str);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
