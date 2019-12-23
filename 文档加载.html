@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/**
+			 * onload事件会在整个页面加载完成后才会触发
+			 * 为window绑定一个事件
+			 * 		这样可以确保我们的代码执行时所有的DOM对象已经加载完毕了，
+			 * 这种方式推荐些外链式
+			 */
+			window.onload = function(){
+				var btn = document.getElementById("but");
+				// console.log(btn);
+				btn.onclick = function(){
+						alert("第二个草拟吗！");
+				};
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 浏览器在加载一个页面时，是按照自上而下的顺序加载的，
+			读取到一行就运行一行，如果将script标签写下页面的上边，
+			在代码执行时，页面还没有加载，页面没有加载DOM对象也没有加载
+			会导致无法获取DOM对象，尽量写在下面
+		 -->
+		<button type="button" id="button">我是第一个按钮（在下方写js代码的）</button>
+		<button type="button" id="but">我是第二个按钮（在上方些js代码的）</button>
+		<script>
+			var btn = document.getElementById("button");
+			// console.log(btn);
+			btn.ondblclick = function() {
+				alert("草拟吗！");
+			};
+			/**
+			 * 将js代码编写到页面的下部就是为了可以在页面加载完毕以后再执行js代码
+			 */
+		</script>
+	</body>
+</html>

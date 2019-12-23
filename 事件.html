@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/**
+			 * 事件：
+			 * 	-事件，就是文档或者浏览器串口中发生的一些特定的交互瞬间。
+			 * 	-JavaScript与和HTML之间的交互是通过事件实现的。
+			 * 	-对于Web应用来说，有下面这些代表性的事件：
+			 * 点击某个元素、将鼠标移至某一个元素上方、按下键盘某个按键，等等。
+			 * 
+			 * -事件就是浏览器和用户之间的交互行为
+			 * 		比如：点击按钮，鼠标移动，关闭窗口。。。
+			 * 		
+			 * 我们可以在事件对应的属性中设置一些js代码
+			 * 		这样当事件触发时，这些代码会执行
+			 * 
+			 * 
+			 */
+		</script>
+	</head>
+	<body>
+		<button type="button" id="button" >我是一个按钮</button>
+		<!-- <button type="button" id="button" onclick="alert('chaonima!');" >我是一个按钮</button> -->
+		<!-- 这种内嵌写法称为结构行为耦合，不方便维护，不推荐使用 -->
+		<script>
+			/**
+			 * 可以为按钮的对应事件绑定处理函数形式来响应事件
+			 */
+			//获取按钮对象
+			var btn = document.getElementById("button");
+			console.log(btn);
+			
+			/**
+			 * 绑定一个单击事件来响应绑定事件处理函数的形式
+			 * 		这样当事件被触发时间，其对应的函数将会被调用
+			 */
+	
+			btn.onclick = function(){
+					alert("草拟吗！");
+					//做到分离事件，推荐使用这种，绑定事件后，一旦触发便会响应
+			};
+			
+		</script>
+	</body>
+</html>

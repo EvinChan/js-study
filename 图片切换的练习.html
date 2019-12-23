@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片切换的练习</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#outer{
+				width: 500px;
+				margin: 50px auto;
+				padding: 10px;
+				background-color: #BC34AB;
+				text-align: center;
+			}
+			#outer img{
+				width: 500px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="outer">
+			<p>一共9张图片，当前是第1张</p>
+			<br />
+			<img src="img/1.jpg" alt="冰棍" />
+			<button id="prev">上一张</button>
+			<button id="next">下一张</button>
+		</div>
+	</body>
+	<script>
+		/**
+		 * 点击按钮切换图片
+		 */
+		var prev = document.getElementById("prev");
+		var next = document.getElementById("next");
+		var img = document.getElementsByTagName("img")[0];//获取img
+		var p = document.getElementsByTagName("p")[0];
+		console.log(p);
+		var count = 0;//计数器
+		
+		
+		prev.onclick = function(){
+			// alert("df");
+			count-=1;
+			if(count < 1){
+				count = 9;
+				console.log("down>>"+count);
+			};
+			p.innerHTML = "一共9张图片，当前是第"+count+"张";
+			img.src = "img/"+count+".jpg";
+			
+			console.log(count);
+			
+			
+		};
+		next.onclick = function(){
+			count+=1;
+			if(count > 9){
+				count = 1;
+				console.log("up>>"+count);
+			};
+			p.innerHTML = "一共9张图片，当前是第"+count+"张";
+			img.src = "img/"+count+".jpg";
+			console.log(count);
+			
+		};
+	</script>
+</html>

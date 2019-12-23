@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全选练习</title>
+	</head>
+	<body>
+		<form method="post" action="">
+			你爱好的运动是？<input type="checkbox" id="checkedAllBox" name="allBox" />全选/全不选<br />
+			<input type="checkbox" name="items" value="足球" />足球
+			<input type="checkbox" name="items" value="篮球" />篮球
+			<input type="checkbox" name="items" value="羽毛球" />羽毛球
+			<input type="checkbox" name="items" value="乒乓球" />乒乓球
+			<br />
+			<button type="button" id="checkedAllBtn">全选</button>
+			<button type="button" id="checkedNoBtn">全不选</button>
+			<button type="button" id="checkedRevBtn">反选</button>
+			<button type="button" id="sendBtn">提交</button>
+
+		</form>
+	</body>
+	<script>
+		/**
+		 * 1. #checkedAllBtn
+		 * 2. #checkedNoBtn
+		 * 3. #checkedRevBtn
+		 * 4. #sendBtn
+		 * 5.#checkedAllBox
+		 * 6.items
+		 */
+		function myClick(idStr, fun) {
+			var btn = document.getElementById(idStr);
+			btn.onclick = fun;
+		}; //封装函数
+		var items = document.getElementsByName("items"); //获取items
+		var checkAllBox = document.getElementById("checkedAllBox");
+		/**
+		 * 全选按钮
+		 * 	-点击按钮以后，四个多选框全部被选中
+		 * 1. #checkedAllBtn
+		 */
+		myClick("checkedAllBtn", function() {
+			for (var i = 0; i < items.length; i++) {
+				items[i].checked = true;
+			}
+			checkAllBox.checked = true;
+		});
+
+		/**
+		 * 全不选按钮
+		 * 	-点击按钮以后，四个多选框全部不被选中
+		 * 1. #checkedNoBtn
+		 */
+		myClick("checkedNoBtn", function() {
+			//遍历items
+			for (var i = 0; i < items.length; i++) {
+				items[i].checked = false;
+			}
+			checkAllBox.checked = false;
+		});
+		/**
+		 * 反选按钮
+		 * -点击后选中的变成未选中，未选中的变成选中
+		 * 3.#checkedRevBtn
+		 */
+		myClick("checkedRevBtn", function() {
+			//遍历items
+			var count=0;
+			for (var i = 0; i < items.length; i++) {
+				// if (items[i].checked) {
+				// 	items[i].checked = false;
+				// }else{
+				// 	items[i].checked = true;
+				// }
+				items[i].checked = !items[i].checked;	
+				if(items[i].checked){
+					count++;
+				}
+			}
+			if(count == items.length){
+				checkAllBox.checked = true;
+			}else{
+				checkAllBox.checked = false;
+			}
+			// checkedAllBox.checked = true;
+			// for (var j=0; j<items.length; j++){
+			// 	//只要有一个是false就不能全选
+			// 	if (!items[j].checked) {
+			// 		checkedAllBox.checked = false;
+			// 		console.log("没全选");
+			// 		//一旦进入判断，则已经得出结果，不用再继续执行循环
+			// 		break;
+			// 	}
+			// }
+		});
+
+		/**
+		 * 提交按钮
+		 * -点击按钮后，将所有选中的多选框的value属性提交
+		 * 4.#senBtn
+		 */
+		myClick("sendBtn", function() {
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].checked == true) {
+					console.log(items[i].value);
+				}
+			}
+		});
+
+		/**
+		 * 全选/全不选
+		 */
+		myClick("checkedAllBox", function() {
+			for (var i = 0; i < items.length; i++) {
+				items[i].checked = this.checked;
+			}
+			
+		});
+		/**
+		 * 全选/全不选与下列绑定联动
+		 * 6.items
+		 * 为四个多选框绑定一个点击事件
+		 */
+		for (var i=0; i<items.length; i++) {
+			items[i].onclick = function() {
+				//判断四个多选框是否全选
+				//将checkAllBox设置为选中状态
+				checkedAllBox.checked = true;
+				for (var j=0; j<items.length; j++){
+					//只要有一个是false就不能全选
+					if (!items[j].checked) {
+						checkedAllBox.checked = false;
+						console.log("没全选");
+						//一旦进入判断，则已经得出结果，不用再继续执行循环
+						break;
+					}
+				}
+			};
+		}
+		
+	</script>
+</html>
