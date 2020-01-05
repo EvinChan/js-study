@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				width: 100%;
+				margin: 0 auto;
+
+			}
+
+			#employeeTable {
+				margin: 0 auto;
+				width: 50%;
+				border: 1px solid #000;
+				padding: 10px;
+			}
+
+			#employeeTable th {
+				border: 1px solid #000;
+			}
+
+			#employeeTable td {
+				border: 1px solid #000;
+			}
+
+			#formDiv {
+				margin: 0 auto;
+				width: 50%;
+				margin-top: 30px;
+				border: 1px solid #000;
+				padding: 10px;
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+			}
+		</style>
+
+	</head>
+	<body>
+		<table id="employeeTable">
+			<div>
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Salary</th>
+					<th>&nbsp;</th>
+				</tr>
+				<tr>
+					<td>Tom</td>
+					<td>13456789067</td>
+					<td>90000</td>
+					<td><a href="javascript:;">Delete</a></td>
+				</tr>
+				<tr>
+					<td>Tom</td>
+					<td>13456789067</td>
+					<td>90000</td>
+					<td><a href="javascript:;">Delete</a></td>
+				</tr>
+				<tr>
+					<td>Tom</td>
+					<td>13456789067</td>
+					<td>90000</td>
+					<td><a href="javascript:;">Delete</a></td>
+				</tr>
+				<tr>
+					<td>Tom</td>
+					<td>13456789067</td>
+					<td>90000</td>
+					<td><a href="javascript:;">Delete</a></td>
+				</tr>
+				<tr>
+					<td>Tom</td>
+					<td>13456789067</td>
+					<td>90000</td>
+					<td><a href="javascript:;">Delete</a></td>
+				</tr>
+			</div>
+
+		</table>
+		<div id="formDiv">
+			<h3>添加新员工信息</h3>
+			<table>
+				<tr>
+					<td class="word">name:</td>
+					<td class="inp">
+						<input type="text" name="emName" id="empName" />
+					</td>
+				</tr>
+
+				<tr>
+					<td class="word">phone:</td>
+					<td class="inp">
+						<input type="text" name="phone" id="phone" />
+					</td>
+				</tr>
+				<tr>
+					<td class="word">salary:</td>
+					<td class="inp">
+						<input type="text" name="salary" id="salary" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button id="addEmpButton" value="abc">Submit</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script>
+		/**
+		 * 点击超链接删除员工信息
+		 */
+		//获取所有超链接
+		var allA = document.getElementsByTagName("a");
+		
+		//为每个超链接都绑定单击响应函数
+		for (var i = 0; i < allA.length; i++) {
+			/**
+			 * for循环会在页面加载完成之后立即执行
+			 * 	而响应函数会在超链接点击时再执行
+			 * 	当响应函数执行时，for循环早已执行完毕了
+			 */
+			allA[i].onclick = function() {
+				var tr = this.parentNode.parentNode;
+				var name = tr.getElementsByTagName("td")[0].innerHTML;
+				var con = confirm("确定删除" + name + "？无法找回");
+				if (con == true) {
+					tr.parentNode.removeChild(tr);
+				} else {
+					return false;
+				}
+				/**
+				 * 点击超链接以后，超链接会跳转页面，这个是超链接的默认行为
+				 * 	但是此时我们不希望出现默认行为，可以通过在响应函数最后return false来取消默认行为
+				 */
+			};
+		}
+	</script>
+</html>

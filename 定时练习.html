@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片自动切换</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#outer {
+				width: 500px;
+				margin: 50px auto;
+				padding: 10px;
+				background-color: #BC34AB;
+				text-align: center;
+			}
+
+			#outer img {
+				width: 500px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="outer">
+			<p>一共9张图片，当前是第1张</p>
+			<br />
+			<img src="img/1.jpg" alt="冰棍"/>
+			<button id="prev">开始播放</button>
+			<button id="next">结束播放</button>
+		</div>
+	</body>
+	<script>
+		var prev = document.getElementById("prev");
+		var next = document.getElementById("next");
+		var img = document.getElementsByTagName("img")[0];//获取img
+		var p = document.getElementsByTagName("p")[0];
+		var timer;
+		var num = 1;
+		function myClick(id,fun){
+			id.onclick = fun;
+		};
+		
+		myClick(prev,function(){
+			/**
+			 * 目前，我们每点击一次按钮，就开启一个定时器，这就导致图片切换速度过快，
+			 * 并且我们只能关闭最后一次定时器
+			 */
+			//在开启定时器之前，需要将上一个定时器关闭，清除定时器
+			clearInterval(timer);
+			/**
+			 * 设置一个定时器来切换图片
+			 */
+			timer = setInterval(function(){
+				num++;
+				// count.innerHTML = num++;
+				p.innerHTML = "一共9张图片，当前是第"+num+"张";
+				img.src = "img/"+ num +".jpg";
+				if(num >= 10){
+					num = 0;
+					p.innerHTML = "准备重新开始";
+					//clearInterval()可以用来关闭一个定时器
+					//方法中需要一个定时器的标识作为参数，这样关闭标识对应的定时器
+				};
+			},1500);//相当于一个可以设定时间的for循环
+			
+		});
+		myClick(next,function(){
+			clearInterval(timer);
+			//clearInterval可以接收任意参数
+			/**
+			 * 如果参数是一个有效的定时器的标识，则停止对应的定时器
+			 * 如果参数不是一个有效的标识，则什么也不做
+			 */
+		});
+		
+		
+		
+	</script>
+</html>

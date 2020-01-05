@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background: #B2BEC3;
+				position: absolute;
+				left: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn01">点击按钮以后向右移动</button>
+		<button id="btn02">点击按钮以后向左移动</button>
+		<br /><br />
+		<div id="box1"></div>
+	</body>
+	<script>
+		function getStyle(obj, name) {
+			//正常浏览器的方式
+			//推荐使用这种情况
+			if (window.getComputedStyle) {
+				return getComputedStyle(obj, null)[name];
+			} else {
+				return obj.currenStyle[name];
+			}
+		};
+		function myClick(id,fun){
+			id.onclick = fun;
+		}
+		var btn01 = document.getElementById("btn01");
+		var btn02 = document.getElementById("btn02");
+		var box1 = document.getElementById("box1");
+		var timer;
+		// myClick(btn01,function(){
+		// 	clearInterval(timer);
+		// 	//开启一个定时器,执行动画效果
+		// 	timer = setInterval(function() {
+		// 		//获取box1原来值
+		// 		var oldValue = parseInt(getStyle(box1, "left"));
+		// 		//设置一个新值
+		// 		var newValue = oldValue + 10;
+		// 		//判断是否大于八百
+		// 		if (newValue > 800) {
+		// 			newValue = 800;
+		// 		}
+		// 		//将新值设置给box1
+		// 		box1.style.left = newValue + "px";
+			
+		// 		//当元素移动到了800px时，使其停止
+		// 		if (newValue == 800) {
+		// 			clearInterval(timer);
+		// 		}
+		// 	}, 30);
+		// });
+		// myClick(btn02,function(){
+		// 	clearInterval(timer);
+		// 	//开启一个定时器,执行动画效果
+		// 	timer = setInterval(function() {
+		// 		//获取box1原来值
+		// 		var oldValue = parseInt(getStyle(box1, "left"));
+		// 		//设置一个新值
+		// 		var newValue = oldValue - 11;
+		// 		//判断是否大于八百
+		// 		if (newValue < 0) {
+		// 			newValue = 0;
+		// 		}
+		// 		//将新值设置给box1
+		// 		box1.style.left = newValue + "px";
+			
+		// 		//当元素移动到了800px时，使其停止
+		// 		if (newValue == 0) {
+		// 			clearInterval(timer);
+		// 		}
+		// 	}, 30);
+		// });
+		
+		//创建一个可以执行简单动画的函数
+		/**
+		 * @param {Object} 
+		 * 参数：
+		 * id  执行动画的对象
+		 * speed 速度
+		 * target  执行动画的目标
+		 * 		
+		 */
+		function move(id,target,speed){
+			clearInterval(timer);
+			//获取box1原来值
+			var current = parseInt(getStyle(id, "left"));
+			/**
+			 * 判断正负值
+			 * 如果从0向800移动，则speed为正
+			 * 如果从800向0移动，则speed为负
+			 */
+			if(current > target){
+				//此时速度应为负值
+				speed = -speed;
+			}
+			//开启一个定时器,执行动画效果
+			timer = setInterval(function() {
+				//获取box1原来值
+				var oldValue = parseInt(getStyle(id, "left"));
+				//设置一个新值
+				var newValue = oldValue + speed;
+				//判断是否大于八百
+				if (speed < 0 && newValue < target || speed > 0 && newValue > target) {
+					newValue = target;
+				}
+				//将新值设置给所属id的盒子
+				id.style.left = newValue + "px";
+			
+				//当元素移动到了target px时，使其停止
+				//当我们向左移动时，需要newValue是否小于target
+				if (newValue == target) {
+					clearInterval(timer);
+				}
+			}, 30);
+		};
+		
+		myClick(btn01,function(){
+			move(box1,800,10);
+		});
+		myClick(btn02,function(){
+			move(box1,10,10);
+		});
+	</script>
+</html>

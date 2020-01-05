@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div></div>
+		<div class="bb">
+			<div>
+				<div class="mui-input-row">
+					<label>Input</label>
+					草拟吗
+					<input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
+				</div>
+				
+			</div>
+		</div>
+		<div class="bb"></div>
+	</body>
+	<script>
+		//获取body标签
+		/**
+		 * 在documen中有一个属性body，它保存的是body的引用
+		 */
+		var body = document.body;
+		console.log(body);
+		
+		//保存html的根标签
+		var html = document.documentElement;
+		console.log(html);
+		
+		//代表页面中所有的元素
+		//all无法直接查询函数内容，无法查看类型，会显示undefined。
+		var all =document.all;
+		console.log(all.length);
+		for(var i = 0; i < all.length ; i++){
+			console.log(all[i]);
+		}
+		/**
+		 * 根据元素class属性值查询一组元素对象
+		 * 
+		 */
+		var box1 = document.getElementsByClassName("bb");
+		//只支持IE9以上的浏览器，IE9以下无法支持，要考虑兼容问题
+		/**
+		 * 虽然IE8中没有getElementsByClassName方法，
+		 * 但是我们可以通过querySelector方法进行查询
+		 * 效果一样，而且还支持IE8
+		 * 使用该方法总会返回唯一的一个元素，
+		 * 如果满足条件的元素有多个，
+		 * 那它只会返回第一个
+		*/
+		
+		
+		
+		//获取页面中所有的div
+		var divs = document.getElementsByTagName("div");
+		console.log(divs);
+		
+		//获取class名为bb的div
+		/**
+		 * document.querySelector()
+		 * 	-需要一个选择器的字符串作为参数，可以根据一个css选择器来查询一个元素节点对象
+		 */
+		var bb1 = document.querySelector(".bb");
+		console.log(bb1.innerHTML);
+		
+		/**
+		 * document.querySelectorAll()
+		 * 	查询全部元素
+		 * -需要一个选择器的字符串作为参数，可以根据一个css选择器来查询一个元素节点对象
+		 */
+		var bb2 = document.querySelectorAll(".bb");
+		console.log(bb2.length);
+	</script>
+</html>

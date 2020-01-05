@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box1{
+				width: 200px;
+				height: 200px;
+				background: #BC34AB;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1"></div>
+	</body>
+	<script>
+		//使div可以根据不同的方向键向不同的方向移动
+		/**
+		 * 按左键，div向左移
+		 * 按右键，div向右移动
+		 * 按下键，div向下移动
+		 * 按上键，div向上移动
+		 */
+		var box1 = document.getElementById("box1");
+		
+		var speed = 10;
+		
+		//创建一个变量表示方向
+		//可以通过修改dir来影响移动的方向
+		var dir = 0;
+		
+		//开启一个定时器来控制div的移动
+		setInterval(function(){
+			//获取按键数值
+			// console.log(event.keyCode);
+			switch(dir){
+				case 37:
+					box1.style.left = box1.offsetLeft - speed + "px";
+					break;
+				case 38:
+					box1.style.top = box1.offsetTop - speed + "px";
+					break;
+				case 39:
+					box1.style.left = box1.offsetLeft + speed + "px";
+					break;
+				case 40:
+					box1.style.top = box1.offsetTop + speed + "px";
+					break;	
+			};
+			
+		},30);
+		document.onkeydown = function(event){
+			event = event || window.event;
+			
+			//当用户按了ctrl后加速
+			if(event.ctrlKey){
+				speed = 100;
+			}else{
+				speed = 10;
+			}
+			
+			// if(event.keyCode == 37){
+			// 	box1.style.left = box1.offsetLeft - 50 + "px";
+			// }else if(event.keyCode == 39){
+			// 	box1.style.left = box1.offsetLeft + 50 + "px";
+			// }else if(event.keyCode == 38){
+			// 	box1.style.top = box1.offsetTop - 50 + "px";
+			// }else if(event.keyCode == 40){
+			// 	box1.style.top = box1.offsetTop + 50 + "px";
+			// }
+			
+			//使dir等于按键的值
+			dir = event.keyCode;
+		};
+		document.onkeyup = function(event){
+			event = event || window.event;
+			dir = 0;
+		};
+	</script>
+</html>

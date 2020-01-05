@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.box1 {
+				width: 200px;
+				height: 200px;
+				background: #BC34AB;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn01">click me01</button>
+		<button id="btn02">click me02</button>
+		<br /><br />
+		<div class="box1" id="box1"></div>
+	</body>
+	<script>
+		/**
+		 * 点击按钮以后修改以后，修改box1的大小
+		 */
+		//获取box1
+		var box1 = document.getElementById("box1");
+		var btn01 = document.getElementById("btn01");
+		btn01.onclick = function() {
+			// alert("fwewe");
+			//修改box1的宽度
+			/**
+			 * 通过js修改元素的样式
+			 * 	语法：元素.style.样式名 = 样式值
+			 * 
+			 * 注意：如果CSS的样式名中含有“-”
+			 * 		例如这种background-color
+			 * 		需要将这种样式名修改为驼峰命名法
+			 * 我们通过style属性设置的样式都是内联样式
+			 * 		而内联样式有较高的优先级，所以听过JS修改的样式往往会立即显示
+			 * 对于!important，则样式会由最高优先级，即使通过JS也不能覆盖样式，
+			 * 		此时会导致JS修改样式失效，尽量不要为样式添加！important
+			 * 
+			 * 		
+			 */
+			box1.style.width = "600px";
+			box1.style.height = "400px";
+			box1.style.backgroundColor = "#34ecab";
+			box1.style.boxShadow = "0px 5px 10px #666";
+			box1.style.transition = "2s";
+			box1.style.borderRadius = "10px";
+			//这种修改的是内联样式
+		};
+		
+		//点击按钮2以后，读取元素的样式
+		var btn02 = document.getElementById("btn02");
+		btn02.onclick = function(){
+			//读取box1的样式
+			/**
+			 * 语法：元素.style.样式名
+			 * 通过style属性设置的读取的样式都是内联样式
+			 * 	无法读取样式表里面的内容
+			 */
+			alert(box1.style.width);
+			
+		};
+	</script>
+</html>

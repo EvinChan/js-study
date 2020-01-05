@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box1{
+				width: 300px;
+				height: 200px;
+				background: #DEB887;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body style="height: 1000px;">
+		<div id="box1"></div>
+	</body>
+	<script>
+		//鼠标移动到哪div就移动到哪里
+		//1、先获取div对象
+		var box1 = document.getElementById("box1");
+		//2、创建鼠标移动对象
+		/**
+		 * clientX/clientY
+		 * 用于获取鼠标在当前的可见窗口的坐标
+		 * 
+		 * 
+		 * pageX/pageY可以获取鼠标相对于当前页面的坐标
+		 * 	但是这两个属性在IE8中不支持，所以如果需要兼容IE8，则不要使用
+		 * 
+		 * 获取滚动条滚动距离
+		 * chrome认为浏览器的滚动条是body的，可以通过body.scrollTop来获取,
+		 * 火狐等浏览器认为浏览器的滚动条是html的
+		 */
+		window.onmousemove = function(event){
+			
+			var st = document.body.scrollTop || document.documentElement.scrollTop;
+			var stL = document.body.scrollLeft || document.documentElement.scrollLeft;
+			//处理client的兼容问题方法，同时也是处理page不兼容IE8的方法
+			console.log(st);
+			
+			event = event || window.event;
+			// var divX = event.pageX;
+			// var divY = event.pageY;
+			var divX = event.clientX;
+			var divY = event.clientY;
+			
+			//设置div的偏移量
+			box1.style.left = divX + stL + "px";
+			box1.style.top = divY + st +"px";
+		};
+	</script>
+</html>

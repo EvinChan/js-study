@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#u1{
+				width: 200px;
+				height: 300px;
+				background: #DEB887;
+				overflow: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn01">添加超链接</button>
+		<ul id="u1">
+			<li><a href="javascript:;" class="link">超链接1</a></li>
+			<li><a href="javascript:;" class="link">超链接2</a></li>
+			<li><a href="javascript:;" class="link">超链接3</a></li>
+		</ul>
+	</body>
+	<script>
+		var u1 = document.getElementById("u1");
+		//点击按钮以后的超链接
+		var btn01 = document.getElementById("btn01");
+		btn01.onclick = function (){
+				//创建一个<li></li>
+				var li = document.createElement("li");
+				li.innerHTML = "<a href=\"javascript:;\" class=\"link\">超链接3</a>";
+				u1.appendChild(li);
+		};
+		/**
+		 * 为每一个超链接都绑定一个单级响应事件
+		 * 这里我们为每一个超链接都绑定了一个单击响应函数，这种操作比较麻烦，
+		 * 	而且这些操作只能为已有的超链接设置事件，而为新添加的超链接必须重新绑定
+		 */
+		var allA = document.getElementsByTagName("a");
+		//遍历
+		for(var i = 0 ; i < allA.length ; i++){
+			allA[i].onclick = function (){
+					alert("Afa");
+			};
+		}
+		/**
+		 * 我们希望只绑定一次事件，即可应用到多个元素，即使这个元素是后添加的
+		 * 	我们可以尝试将其绑定给元素的共同元素的共同祖先元素
+		 * 
+		 * 事件的委派：
+		 * 	-指将事件统一绑定给元素的共同祖先元素，当后代元素上的事件触发时，会一直冒泡到祖先元素
+		 * 		从通过祖先元素的响应函数来处理事件
+		 *	-事件委派是利用了冒泡，通过委派可以减少事件绑定的次数，提高程序的性能
+		 */
+		//为ul绑定一个单击响应函数
+		u1.onclick = function(event){
+			event = event || window.wvent;
+			
+			/**
+			 * target
+			 *  - event中的target表示的触发事件的对象
+			 */
+			//如果触发事件的对象是我们期望的元素，则执行否则不执行
+			if(event.target.className == "link"){
+				alert("我是ul的单击响应函数");
+			}
+				
+		};
+		
+	</script>
+</html>

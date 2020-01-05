@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box1{
+				width: 100px;
+				height: 300px;
+				background: #00FFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+
+		</div>
+		<input type="text" />
+	</body>
+	<script>
+		/**
+		 * 键盘事件：
+		 * onkeydown
+		 * 	-按键被松开
+		 * 	-对于onkeydown来说如果一直按着某个按键不松手，则事件会一直触发
+		 * 	-当onkeydown连续触发时，第一次和第二次之间的间隔会长一点，其他的会非常快
+		 * 	-这种设计是为了防止误操作发生
+		 * onkeyup
+		 *  - 按键被按下
+		 * 
+		 * 键盘事件一般都会绑定给一些可以获取焦点的对象或者是document
+		 */
+		document.onkeydown = function(event) {
+			event = event || window.event;
+			/**
+			 * 可以通过keycode获取按键编码
+			 * 	通过它可以判断哪个按键被按下
+			 * 除了keyCode，事件对象中还提供了几种属性
+			 * 	altKey
+			 * 	ctrlKey
+			 * 	shiftKey
+			 * 		-这三个用来判断alt ctrl 和 shift 是否被按下	
+			 * 			如果按下则返回true，否则返回false
+			 */
+
+			//判断y是否被按下
+			if (event.keyCode === 89 && event.ctrlKey) {
+				console.log("ctrl和y同时被按下");
+			}
+		}
+		document.onkeyup = function() {
+			console.log("up");
+		}
+
+		var input = document.getElementsByTagName("input")[0];
+		input.onkeydown = function(event) {
+			event = event || window.event;
+			console.log("down");
+			//在文本框中不能输入数字
+			if(event.keyCode >= 48 && event.keyCode <= 57){
+				return false;//在文本框中输入内容，属于onkeydown默认行为，如何在onkedown中取消默认行为则不能输出文本内容
+			}
+			
+		};
+		input.onkeyup = function() {
+			console.log("up");
+		};
+	</script>
+</html>
